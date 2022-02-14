@@ -3,7 +3,10 @@ name: Aria2-Fast Build x64
 on:
   release:
     types: [published]
-  workflow_dispatch:
+    
+  push:
+    branches: 
+      - master
 
 
 jobs:
@@ -18,9 +21,9 @@ jobs:
         sudo docker build -t aria2-mingw - < Dockerfile.mingw
         id=$(sudo docker create aria2-mingw)
         sudo docker cp $id:/aria2/src/aria2c.exe ./aria2c-fast_x64.exe
-    - name: Upload to release
-      uses: JasonEtco/upload-to-release@master
+        
+    - name : Upload artifact
+      uses: actions/upload-artifact@master
       with:
-        args: aria2c-fast_x64.exe application/vnd.microsoft.portable-executable
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        name: aria2c-fast
+        path: ./
