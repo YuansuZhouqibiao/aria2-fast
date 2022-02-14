@@ -26,4 +26,4 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: aria2c-fast
-        path: ./
+        path: ./aria2c-fast_x64.exe
